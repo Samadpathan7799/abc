@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/weather")
 public class WeatherApiController {
@@ -15,14 +17,15 @@ public class WeatherApiController {
     @Autowired
     private WeatherService weatherService;
 
+
     @GetMapping("/summary/{city}")
-    public ResponseEntity<?> getForecastSummary(@PathVariable String city) {
+    public ResponseEntity<?> getForecastSummary(@PathVariable String city) throws IOException, InterruptedException {
         ResponseEntity<?> response = weatherService.getForecastSummary(city);
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
     }
 
     @GetMapping("/hourly/{city}")
-    public ResponseEntity<?> getHourlyForecast(@PathVariable String city) {
+    public ResponseEntity<?> getHourlyForecast(@PathVariable String city) throws IOException, InterruptedException {
         ResponseEntity<?> response = weatherService.getHourlyForecast(city);
         return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
     }
