@@ -1,5 +1,6 @@
 package com.example.Weather.controller;
 
+import com.example.Weather.model.WeatherForecast;
 import com.example.Weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,16 @@ public class WeatherApiController {
 
     @Autowired
     private WeatherService weatherService;
+    @GetMapping("/forecast/{cityName}")
+    public ResponseEntity
+    getWeatherForecast(@PathVariable String cityName) throws IOException, InterruptedException {
+        WeatherForecast weatherForecast = weatherService.getWeatherForecast(cityName);
+        if (weatherForecast != null) {
+            return ResponseEntity.ok(weatherForecast);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
     @GetMapping("/summary/{city}")

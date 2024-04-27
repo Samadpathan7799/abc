@@ -79,8 +79,8 @@ public class WeatherService {
     private String weatherApiHost;
     public WeatherForecast getWeatherForecast(String cityName) throws IOException, InterruptedException {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("X-RapidAPI-Key", weatherApiKey);
-        headers.set("X-RapidAPI-Host", weatherApiHost);
+        headers.set("X-RapidAPI-Key", rapidApiKey);
+        headers.set("X-RapidAPI-Host", rapidApiHost);
 
         HttpEntity<String> entity = new HttpEntity<String>(String.valueOf(headers));
 
